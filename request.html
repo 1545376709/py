@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form id="req" name="req" method="post" action="http://localhost/param" onsubmit="alert('good')" enctype="multipart/form-data">
+    <input type="hidden" name="sessionKey" value="1">
+    <input type="hidden" name="vid" value="1">
+    <input type="file" name="file">
+    <input type="submit">
+</form>
+<script>
+    document.req.submit1 = function () {
+        var xhr = new XMLHttpRequest();
+        url = 'http://localhost/param';
+        xhr.open("post", url, true);
+        // xhr.overrideMimeType("application/x-www-form-urlencoded");
+        var form = new FormData(document.req);
+
+        // form.append('sessionKey', '1');
+
+        form.append('vid', '1');
+        JSON.stringify()
+
+
+        xhr.addEventListener("readystatechange", function () {
+            var result = xhr;
+            console.log(result.readyState)
+            if (result.status != 200) { //error
+                console.log(result.status)
+            } else if (result.readyState == 4) { //finished
+                console.log(result.responseText)
+            }
+        });
+        // xhr.send(document)
+        xhr.send(form);
+    }
+    window.onload = function () {
+
+
+        // document.req.submit1();
+        // document.req.submit();
+    }
+</script>
+</body>
+</html>
