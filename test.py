@@ -43,7 +43,7 @@ def download_videos_num_size_set(url, num, size):
 
     json_str = re.sub('jsonCallback_bili_.*?\(', '', resp.text)
     print(re.sub('jsonCallback_bili_.*?\(', '', resp.text))
-    json_str = json_str[:-1]
+    json_str = json_str[:-1]  # 截去最后一个字符
     print(json_str)
     jsons = json.loads(json_str)
     print(jsons)
@@ -52,10 +52,8 @@ def download_videos_num_size_set(url, num, size):
     for result in results:
         href = 'https://www.bilibili.com/video/{}'.format(result['bvid'])
         print(href)
-    #     开始下载视频
+        #     开始下载视频
         download_video(href)
-
-
 
     if resp.status_code != 206:
         return resp.status_code

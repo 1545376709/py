@@ -43,7 +43,8 @@ def download_mp3(min, max, url, title):
 
 def download_mp3_mp4(mp3_path, mp4_path, title):
     min = 0
-    max = 200000
+    # max = 200000
+    max = 85000000
     mp4_status_code = 0
     mp3_status_code = 0
     while True:
