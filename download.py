@@ -57,10 +57,10 @@ def download_video(href):
         videos = jsons["data"]["dash"]["video"]
         mp3_url = jsons["data"]["dash"]["audio"][0]["baseUrl"]
         for video in videos:
-            print(video["baseUrl"])
+            # print(video["baseUrl"])
             if download_mp3_mp4(mp3_url, video["baseUrl"], bvid) == 0:
                 # 写入视频信息
-                json.dump(videoData, open('infos/{}.json'.format(bvid), 'w', encoding='utf-8'), ensure_ascii=False)
+                json.dump(videoData, open('MP4/{}.json'.format(bvid), 'w', encoding='utf-8'), ensure_ascii=False)
 
                 # 写入视频封面
                 headers = {
@@ -69,9 +69,8 @@ def download_video(href):
                 }
                 resp = requests.get(pic_url, headers=headers)
 
-                with open('pics/{}.jpg'.format(bvid), 'wb') as f:
+                with open('MP4/{}.jpg'.format(bvid), 'wb') as f:
                     f.write(resp.content)
-
                 # 合并MP3与MP4
                 import subprocess
                 try:
@@ -82,14 +81,6 @@ def download_video(href):
                 except:
                     pass
                 break
-
-            # download_mp4_mp3.download_mp3_mp4('', video["baseUrl"], 'dance{}'.format(video["bandwidth"]))
-            # break
-            # if download(video["baseUrl"]):
-            #     break
-        mp4_url = jsons["data"]["dash"]["video"][0]["baseUrl"]
-
-    data = jsons["data"]
     return
 
 
@@ -103,7 +94,7 @@ def download_mp3_mp4(mp3url, mp4url, filename):
     resp = requests.get(mp4url, headers=headers)
     if int(resp.headers.get('content-range').split('/')[-1]) < value.max_video_length * 1048576:
         # print(resp.headers.get('content-range').split('/')[-1])
-        # download_mp4_mp3.download_mp3_mp4(mp3url, mp4url, filename)
+        download_mp4_mp3.download_mp3_mp4(mp3url, mp4url, filename)
         return 0
 
 

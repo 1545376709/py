@@ -4,6 +4,7 @@ import re
 
 import requests
 
+import download
 import download_mp4_mp3
 import value
 
@@ -46,9 +47,10 @@ def download_videos_num_size_set():
     # print(results)
     for result in results:
         href = 'https://www.bilibili.com/video/{}'.format(result['bvid'])
-        # print(href)
+        print(href)
         #     开始下载视频
         # download_video(href)
+        download.download_video(href)
 
 
 def get_mp3_mp4_url(href):
@@ -102,5 +104,5 @@ def get_content_length(url):
 
 
 if __name__ == '__main__':
-    # main()
-    get_mp3_mp4_url('')
+    main()
+    # get_mp3_mp4_url('')
