@@ -55,7 +55,8 @@ def download_videos_num_size_set():
 
 def get_mp3_mp4_url(href):
     if href == '':
-        href = 'https://www.bilibili.com/video/BV1Gq4y1f7U7'
+        # href = 'https://www.bilibili.com/video/BV1Gq4y1f7U7'
+        href = 'https://www.bilibili.com/video/BV1bU4y1P7VG'
     headers = {
         'host': 'www.bilibili.com',
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) '
@@ -79,7 +80,10 @@ def get_mp3_mp4_url(href):
         videos = jsons["data"]["dash"]["video"]
         audios = jsons["data"]["dash"]["audio"]
         for video in videos:
+            if video["codecs"] == 'hev1.1.6.L120.90':
+                continue
             print(video["baseUrl"])
+            print(video["codecs"])
             get_content_length(video["baseUrl"])
             # download_mp4_mp3.download_mp3_mp4('', video["baseUrl"], 'dance{}'.format(video["bandwidth"]))
             # break

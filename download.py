@@ -58,9 +58,11 @@ def download_video(href):
         mp3_url = jsons["data"]["dash"]["audio"][0]["baseUrl"]
         for video in videos:
             # print(video["baseUrl"])
+            if video["codecs"] == 'hev1.1.6.L120.90':
+                continue
             if download_mp3_mp4(mp3_url, video["baseUrl"], bvid) == 0:
                 # 写入视频信息
-                json.dump(videoData, open('MP4/{}.json'.format(bvid), 'w', encoding='utf-8'), ensure_ascii=False)
+                json.dump(videoData, open('infos/{}.json'.format(bvid), 'w', encoding='utf-8'), ensure_ascii=False)
 
                 # 写入视频封面
                 headers = {
@@ -69,7 +71,7 @@ def download_video(href):
                 }
                 resp = requests.get(pic_url, headers=headers)
 
-                with open('MP4/{}.jpg'.format(bvid), 'wb') as f:
+                with open('pics/{}.jpg'.format(bvid), 'wb') as f:
                     f.write(resp.content)
                 # 合并MP3与MP4
                 import subprocess
