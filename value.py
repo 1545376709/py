@@ -8,7 +8,8 @@ download_num = 100
 # 最大视频大小 单位MB
 max_video_length = 100
 # bilibili 视频的类型id 用于指定下载哪一类型的视频
-tag_id = 208
+# tag_id = 208  # 校园学习
+tag_id = 231  # 计算机科学
 
 # 时间范围要<=92天
 time_from = 20210625

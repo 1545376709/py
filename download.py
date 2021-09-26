@@ -10,7 +10,8 @@ import value
 
 def download_video(href):
     if href == '':
-        href = 'https://www.bilibili.com/video/BV1Gq4y1f7U7'
+        # href = 'https://www.bilibili.com/video/BV1Gq4y1f7U7'
+        href = 'https://www.bilibili.com/video/BV1Zy4y1K7SH'
     headers = {
         'host': 'www.bilibili.com',
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) '
@@ -27,14 +28,16 @@ def download_video(href):
     }
     resp = requests.get(href, headers=headers)
     # print(resp.text)
-    json_str = resp.text.split('window.__playinfo__=')[-1].split('<')[0].split(';')[0]
+    json_str = resp.text.split('window.__playinfo__=')[-1].split('</script><script>window.'
+                                                                 '__INITIAL_STATE__')[0].split(';')[0]
 
     jsons = json.loads(json_str)
     # print(jsons)
 
-    info_str = resp.text.split('window.__INITIAL_STATE__=')[-1].split('(function')[0].split(';')[0]  # 注意 0 1 -1 的意义
+    info_str = resp.text.split('window.__INITIAL_STATE__=')[-1].split(';(function(){var')[0]  # 注意 0 1 -1 的意义
 
     # print(info_str)
+    # return
     info_json = json.loads(info_str)
 
     bvid = info_json["bvid"]
