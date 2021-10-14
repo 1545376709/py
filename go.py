@@ -1,6 +1,8 @@
 #!/usr/bin/python
 import json
+import os
 import re
+from tkinter import E
 
 import requests
 
@@ -50,7 +52,11 @@ def download_videos_num_size_set():
         print(href)
         #     开始下载视频
         # download_video(href)
-        download.download_video(href)
+        try:
+            download.download_video(href)
+        except:
+            print('fail to download')
+            pass
 
 
 def get_mp3_mp4_url(href):
@@ -108,5 +114,13 @@ def get_content_length(url):
 
 
 if __name__ == '__main__':
+    try:
+        os.mkdir('./videos')
+        os.mkdir('./audios')
+        os.mkdir('./infos')
+        os.mkdir('./pics')
+        os.mkdir('./MP4')
+    except:
+        pass
     main()
     # get_mp3_mp4_url('')

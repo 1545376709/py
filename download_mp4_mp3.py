@@ -74,6 +74,9 @@ def main():
     title = 'test'
     os.mkdir('./videos')
     os.mkdir('./audios')
+    os.mkdir('./infos')
+    os.mkdir('./pics')
+    os.mkdir('./MP4')
     download_mp3_mp4(mp3_path, mp4_path, title)
     # print(os.curdir)
 
