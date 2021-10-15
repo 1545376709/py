@@ -11,7 +11,7 @@ def download_mp4(min, max, url, title):
         'Referer': 'https://www.bilibili.com',
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36'
     }
-    resp = requests.get(url, headers=headers)
+    resp = requests.get(url, headers=headers,verify=False)
     if resp.status_code != 206:
         return resp.status_code
     # print(resp.text)
@@ -30,7 +30,7 @@ def download_mp3(min, max, url, title):
         'Referer': 'https://www.bilibili.com',
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36'
     }
-    resp = requests.get(url, headers=headers)
+    resp = requests.get(url, headers=headers,verify=False)
     if resp.status_code != 206:
         return resp.status_code
     print(resp.status_code)

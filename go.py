@@ -2,7 +2,7 @@
 import json
 import os
 import re
-from tkinter import E
+import urllib3
 
 import requests
 
@@ -52,11 +52,11 @@ def download_videos_num_size_set():
         print(href)
         #     开始下载视频
         # download_video(href)
-        try:
-            download.download_video(href)
-        except:
-            print('fail to download')
-            pass
+        # try:
+        download.download_video(href)
+    # except:
+    #     print('fail to download')
+    #     pass
 
 
 def get_mp3_mp4_url(href):
@@ -108,7 +108,7 @@ def get_content_length(url):
         'Referer': 'https://www.bilibili.com',
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36'
     }
-    resp = requests.get(url, headers=headers)
+    resp = requests.get(url, headers=headers, verify=False)
     print(resp.headers.get('content-range'))
     return
 
@@ -122,5 +122,6 @@ if __name__ == '__main__':
         os.mkdir('./MP4')
     except:
         pass
+    urllib3.disable_warnings()
     main()
     # get_mp3_mp4_url('')

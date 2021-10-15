@@ -78,13 +78,13 @@ def download_video(href):
                     f.write(resp.content)
                 # 合并MP3与MP4
                 import subprocess
-                try:
-                    # subprocess.call('echo 123', shell=True)
-                    subprocess.call('ffmpeg -i ' + 'videos/{}.mp4'.format(bvid) + ' -i ' + 'audios/{}.mp3'.format(
-                        bvid) + ' -vcodec copy -acodec copy ' + 'MP4/{}.mp4'.format(bvid),
-                                    shell=True)
-                except:
-                    pass
+                # try:
+                #     # subprocess.call('echo 123', shell=True)
+                #     subprocess.call('ffmpeg -i ' + 'videos/{}.mp4'.format(bvid) + ' -i ' + 'audios/{}.mp3'.format(
+                #         bvid) + ' -vcodec copy -acodec copy ' + 'MP4/{}.mp4'.format(bvid),
+                #                     shell=True)
+                # except:
+                #     pass
                 break
     return
 
@@ -96,7 +96,8 @@ def download_mp3_mp4(mp3url, mp4url, filename):
         'Referer': 'https://www.bilibili.com',
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36'
     }
-    resp = requests.get(mp4url, headers=headers)
+    print(mp4url)
+    resp = requests.get(mp4url, headers=headers,verify=False)
     if int(resp.headers.get('content-range').split('/')[-1]) < value.max_video_length * 1048576:
         # print(resp.headers.get('content-range').split('/')[-1])
         download_mp4_mp3.download_mp3_mp4(mp3url, mp4url, filename)
